@@ -1,0 +1,19 @@
+// This file will be overwritten on each session.
+// Any manual changes made to this file will be lost.
+
+void TargetDownload (void) {
+    Util.Log ("Downloading Program: C:\workvob\puliceworx\ws-multicore\multicore\build\zephyr\merged_domains.hex");
+    Target.LoadMemory ("C:\workvob\puliceworx\ws-multicore\multicore\build\zephyr\merged_domains.hex", 0);
+}
+
+void OnProjectLoad (void) {
+    Project.SetDevice ("nRF5340_xxAA_APP");
+    Project.SetHostIF ("USB", "1050044081");
+    Project.SetTargetIF ("SWD");
+    Project.SetTIFSpeed ("4 MHz");
+    Project.AddSvdFile ("$(InstallDir)/Config/CPU/Cortex-M4F.svd");
+    Project.AddSvdFile ("c:\ncs\v2.3.0\modules\hal\nordic\nrfx\mdk\nrf5340_application.svd");
+    Project.SetOSPlugin ("ZephyrPlugin.js");
+    File.Open ("C:\workvob\puliceworx\ws-multicore\multicore\build\zephyr\zephyr.elf");
+    Window.Show ("Zephyr");
+}
